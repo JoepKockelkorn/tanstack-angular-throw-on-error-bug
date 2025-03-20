@@ -6,5 +6,5 @@ How to reproduce:
 - Run `npm install`
 - Run `npx ng serve --open`
 - Don't see an alert
-- Nagivate to a different tab in the browser and come back
+- Navigate to a different tab in the browser and come back
 - See an alert
