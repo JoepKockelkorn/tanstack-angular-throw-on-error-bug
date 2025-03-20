@@ -1,12 +1,18 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { injectQuery } from '@tanstack/angular-query-experimental';
+import { lastValueFrom, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'tanstack-angular-throw-on-error-bug';
+  protected readonly query = injectQuery(() => ({
+    queryKey: ['example'],
+    queryFn: () =>
+      lastValueFrom(throwError(() => new HttpErrorResponse({ status: 500 }))),
+  }));
 }
